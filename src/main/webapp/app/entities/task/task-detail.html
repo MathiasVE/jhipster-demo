@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span translate="appApp.task.detail.title">Task</span> {{vm.task.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="appApp.task.taskId">Task Id</span></dt>
+        <dd>
+            <span>{{vm.task.taskId}}</span>
+        </dd>
+        <dt><span translate="appApp.task.title">Title</span></dt>
+        <dd>
+            <span>{{vm.task.title}}</span>
+        </dd>
+        <dt><span translate="appApp.task.description">Description</span></dt>
+        <dd>
+            <span>{{vm.task.description}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="task-detail.edit({id:vm.task.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

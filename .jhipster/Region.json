@@ -1,0 +1,20 @@
+{
+  "relationships": [],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "regionId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "regionName",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160728140058",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "entityTableName": "region"
+}
