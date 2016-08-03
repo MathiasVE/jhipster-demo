@@ -1,29 +1,54 @@
 node {
-    // uncomment these 2 lines and edit the name 'node-4.4.7' according to what you choose in configuration
-    // def nodeHome = tool name: 'node-4.4.7', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-    // env.PATH = "${nodeHome}/bin:${env.PATH}"
+  stage 'fetch code'
+  git 'https://github.com/MathiasVE/jhipster-demo'
 
-    stage 'check tools'
-    sh "node -v"
-    sh "npm -v"
-    sh "bower -v"
-    sh "gulp -v"
+  def maven = docker.image('maven:3.3.3-jdk-8')
+  maven.pull()
+  def jhipster = docker.image('jhipster/jhipster')
+  jhipster.pull() 
+  
+  maven.inside {
+    stage 'Install'
+    sh 'mvn -B clean install'
+    if(env.BRANCH_NAME == "testing") {
+      stage 'Test'
+      sh 'mvn -B test'
+    }
+  }
 
-    stage 'checkout'
-    checkout scm
+  jhipster.inside {
+    stage 'Prepare js/css'
+    // Due to a bug in npm we need to keep installing until it succeeds
+    sh 'NPM=-1; while [ ${NPM} -ne 0 ]; do npm install --no-bin-links; NPM=$?; done'
+    // Bad dependency declared so we take the latest version ignoring the unsafe warnings
+    sh 'npm install --unsafe-perm node-sass --no-bin-links'
+	stage 'Test js/css'
+	sh 'gulp test'
+	stage 'Build js/css'
+    sh 'gulp build'
+  }
+ 
+  maven.inside { 
+    stage 'Build docker image'
+    if(env.BRANCH_NAME == "development") {
+      sh './mvnw package -DskipTests -Pdev docker:build'
+    } else {
+      sh './mvnw package -DskipTests -Pprod docker:build'
+    }
+  }
 
-    stage 'npm install'
-    sh "npm install"
+  stage 'Deploy'
+  if(env.BRANCH_NAME == "development") {
+    sh 'sed -i "s/8080:8080/5000:8080/g" src/main/docker/app.yml'
+    sh 'sed -i "s/5432:5432/5001:5432/g" src/main/docker/postgresql.yml'
+  } else if (env.BRANCH_NAME == "testing") {
+    sh 'sed -i "s/8080:8080/5100:8080/g" src/main/docker/app.yml'
+    sh 'sed -i "s/5432:5432/5101:5432/g" src/main/docker/postgresql.yml'
+  } else {
+    sh 'sed -i "s/8080:8080/80:8080/g" src/main/docker/app.yml'
+  }
+  if(env.BRANCH_NAME != "master") {
+    sh "docker-compose -p jhipster_${env.BRANCH_NAME} -f src/main/docker/app.yml up -d"
+  }
 
-    stage 'clean'
-    sh "./mvnw clean"
-
-    stage 'backend tests'
-    sh "./mvnw test"
-
-    stage 'frontend tests'
-    sh "gulp test"
-
-    stage 'packaging'
-    sh "./mvnw package -Pprod -DskipTests"
 }
