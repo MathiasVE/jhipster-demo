@@ -10,10 +10,8 @@ node {
   maven.inside {
     stage 'Install'
     sh 'mvn -B clean install'
-    if(env.BRANCH_NAME == "testing") {
-      stage 'Test'
+    stage 'Test'
       sh 'mvn -B test'
-    }
   }
 
   jhipster.inside {
@@ -22,8 +20,9 @@ node {
     sh 'NPM=-1; while [ ${NPM} -ne 0 ]; do npm install --no-bin-links; NPM=$?; done'
     // Bad dependency declared so we take the latest version ignoring the unsafe warnings
     sh 'npm install --unsafe-perm node-sass --no-bin-links'
+    sh 'npm install phantomjs --no-bin-links'
     stage 'Test js/css'
-    sh 'gulp test'
+    sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs/bin/phantomjs"; gulp test'
     stage 'Build js/css'
     sh 'gulp build'
   }
@@ -52,3 +51,4 @@ node {
   }
 
 }
+
