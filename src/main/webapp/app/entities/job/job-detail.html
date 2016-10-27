@@ -1,0 +1,45 @@
+
+<div>
+    <h2><span translate="appApp.job.detail.title">Job</span> {{vm.job.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span translate="appApp.job.jobId">Job Id</span></dt>
+        <dd>
+            <span>{{vm.job.jobId}}</span>
+        </dd>
+        <dt><span translate="appApp.job.jobTitle">Job Title</span></dt>
+        <dd>
+            <span>{{vm.job.jobTitle}}</span>
+        </dd>
+        <dt><span translate="appApp.job.minSalary">Min Salary</span></dt>
+        <dd>
+            <span>{{vm.job.minSalary}}</span>
+        </dd>
+        <dt><span translate="appApp.job.maxSalary">Max Salary</span></dt>
+        <dd>
+            <span>{{vm.job.maxSalary}}</span>
+        </dd>
+        <dt><span translate="appApp.job.employee">Employee</span></dt>
+        <dd>
+            <a ui-sref="employee-detail({id:vm.job.employee.id})">{{vm.job.employee.id}}</a>
+        </dd>
+        <dt><span translate="appApp.job.task">Task</span></dt>
+        <dd>
+            <span ng-repeat="task in vm.job.tasks">
+                <a ui-sref="task-detail({id: task.id})">{{task.title}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="job-detail.edit({id:vm.job.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

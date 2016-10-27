@@ -1,0 +1,30 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipType": "one-to-one",
+      "relationshipName": "region",
+      "otherEntityName": "region",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "country"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "countryId",
+      "fieldType": "Long"
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "countryName",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20160728140059",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "entityTableName": "country"
+}
