@@ -1,10 +1,12 @@
 version: '2'
 services:
     app-postgresql:
-        container_name: app-postgresql-$ABC_ENV
+        container_name: app-postgresql
         image: postgres:9.5.3
         # volumes:
         #     - ~/volumes/jhipster/app/postgresql/:/var/lib/postgresql/
         environment:
             - POSTGRES_USER=app
             - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432

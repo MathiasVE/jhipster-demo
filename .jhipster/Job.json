@@ -1,14 +1,12 @@
 {
   "relationships": [
     {
-      "relationshipId": 1,
       "relationshipName": "employee",
       "otherEntityName": "employee",
       "relationshipType": "many-to-one",
       "otherEntityField": "id"
     },
     {
-      "relationshipId": 2,
       "relationshipType": "many-to-many",
       "relationshipName": "task",
       "otherEntityName": "task",
@@ -18,29 +16,25 @@
   ],
   "fields": [
     {
-      "fieldId": 1,
       "fieldName": "jobId",
       "fieldType": "Long"
     },
     {
-      "fieldId": 2,
       "fieldName": "jobTitle",
       "fieldType": "String"
     },
     {
-      "fieldId": 3,
       "fieldName": "minSalary",
       "fieldType": "Long"
     },
     {
-      "fieldId": 4,
       "fieldName": "maxSalary",
       "fieldType": "Long"
     }
   ],
-  "changelogDate": "20160728140004",
+  "changelogDate": "20161027073755",
+  "entityTableName": "job",
   "dto": "no",
   "pagination": "pagination",
-  "service": "no",
-  "entityTableName": "job"
+  "service": "no"
 }

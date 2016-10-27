@@ -1,7 +1,6 @@
 {
   "relationships": [
     {
-      "relationshipId": 1,
       "relationshipType": "one-to-one",
       "relationshipName": "country",
       "otherEntityName": "country",
@@ -12,34 +11,29 @@
   ],
   "fields": [
     {
-      "fieldId": 1,
       "fieldName": "locationId",
       "fieldType": "Long"
     },
     {
-      "fieldId": 2,
       "fieldName": "streetAddress",
       "fieldType": "String"
     },
     {
-      "fieldId": 3,
       "fieldName": "postalCode",
       "fieldType": "String"
     },
     {
-      "fieldId": 4,
       "fieldName": "city",
       "fieldType": "String"
     },
     {
-      "fieldId": 5,
       "fieldName": "stateProvince",
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160728140000",
+  "changelogDate": "20161027073751",
+  "entityTableName": "location",
   "dto": "no",
   "pagination": "no",
-  "service": "no",
-  "entityTableName": "location"
+  "service": "no"
 }

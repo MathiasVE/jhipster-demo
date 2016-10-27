@@ -2,7 +2,6 @@ package com.mycompany.myapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -34,13 +33,6 @@ public class Employee implements Serializable {
     @Column(name = "employee_id")
     private Long employeeId;
 
-    /**
-     * The firstname attribute.                                                
-     * 
-     */
-    @ApiModelProperty(value = ""
-        + "The firstname attribute.                                           "
-        + "")
     @Column(name = "first_name")
     private String firstName;
 
