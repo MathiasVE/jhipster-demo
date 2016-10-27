@@ -7,16 +7,19 @@ node {
   } else {
     PORT="80"
   }
-  
+
   stage 'undeploy current'
   if(env.BRANCH_NAME != "master") {
-    sh "export ABC_PORT=$PORT; export ABC_ENV=${env.BRANCH_NAME}; docker-compose -p jhipster_${env.BRANCH_NAME} -f src/main/docker/app.yml down"
+      sh "if [ -f /src/main/docker/docker/app.yml ]; then export ABC_PORT=$PORT; export ABC_ENV=${env.BRANCH_NAME}; docker-compose -p jhipster_${env.BRANCH_NAME} -f src/main/docker/app.yml down; fi"
   }
   
   stage 'fetch code'
   // Fetch the from my repository
   git 'https://github.com/MathiasVE/jhipster-demo'
   
+
+  
+  stage 'pull container images'
   def maven = docker.image('maven:3.3.3-jdk-8')
   maven.pull()
   def jhipster = docker.image('jhipster/jhipster')
@@ -51,6 +54,8 @@ node {
     sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs/bin/phantomjs"; gulp test'
     stage 'Build js/css'
     sh 'gulp build'
+    stage 'Build image'
+    sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs/bin/phantomjs"; ./mvnw package -Pprod docker:build'
   }
   
   stage 'Deploy'
