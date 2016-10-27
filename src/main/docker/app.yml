@@ -2,7 +2,7 @@ version: '2'
 services:
     app-app:
         image: app
-        container-name: abc-jhipster-$ABC_ENV
+        container_name: abc-jhipster-$ABC_ENV
         links:
             - app-postgresql:postgresql
         environment:
