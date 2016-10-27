@@ -15,7 +15,7 @@ node {
   
   stage 'fetch code'
   // Fetch the from my repository
-  git 'https://github.com/MathiasVE/jhipster-demo'
+  git url: 'https://github.com/MathiasVE/jhipster-demo', branch: env.BRANCH_NAME
   
 
   
@@ -51,11 +51,11 @@ node {
     // Bad dependency declared so we take the latest version ignoring the unsafe warnings
     sh 'npm install --unsafe-perm node-sass --no-bin-links'
     stage 'Test js/css'
-    sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs/bin/phantomjs"; gulp test'
+    // sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs-prebuild/bin/phantomjs"; gulp test'
     stage 'Build js/css'
-    sh 'gulp build'
+    sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs-prebuild/bin/phantomjs"; gulp build'
     stage 'Build image'
-    sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs/bin/phantomjs"; ./mvnw package -Pprod docker:build'
+    sh 'export PHANTOMJS_BIN="$(pwd)/node_modules/phantomjs-prebuild/bin/phantomjs"; ./mvnw package -DskipTests -Pprod docker:build'
   }
   
   stage 'Deploy'
@@ -64,3 +64,4 @@ node {
     sh "export ABC_PORT=$PORT; export ABC_ENV=${env.BRANCH_NAME}; docker-compose -p jhipster_${env.BRANCH_NAME} -f src/main/docker/app.yml up -d"
   }
 }
+
