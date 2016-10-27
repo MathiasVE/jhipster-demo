@@ -1,7 +1,6 @@
 {
   "relationships": [
     {
-      "relationshipId": 1,
       "relationshipType": "many-to-many",
       "relationshipName": "job",
       "otherEntityName": "job",
@@ -11,24 +10,21 @@
   ],
   "fields": [
     {
-      "fieldId": 1,
       "fieldName": "taskId",
       "fieldType": "Long"
     },
     {
-      "fieldId": 2,
       "fieldName": "title",
       "fieldType": "String"
     },
     {
-      "fieldId": 3,
       "fieldName": "description",
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160728140002",
+  "changelogDate": "20161027073753",
+  "entityTableName": "task",
   "dto": "no",
   "pagination": "no",
-  "service": "no",
-  "entityTableName": "task"
+  "service": "no"
 }

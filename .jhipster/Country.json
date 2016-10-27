@@ -1,7 +1,6 @@
 {
   "relationships": [
     {
-      "relationshipId": 1,
       "relationshipType": "one-to-one",
       "relationshipName": "region",
       "otherEntityName": "region",
@@ -12,19 +11,17 @@
   ],
   "fields": [
     {
-      "fieldId": 1,
       "fieldName": "countryId",
       "fieldType": "Long"
     },
     {
-      "fieldId": 2,
       "fieldName": "countryName",
       "fieldType": "String"
     }
   ],
-  "changelogDate": "20160728140059",
+  "changelogDate": "20161027073750",
+  "entityTableName": "country",
   "dto": "no",
   "pagination": "no",
-  "service": "no",
-  "entityTableName": "country"
+  "service": "no"
 }

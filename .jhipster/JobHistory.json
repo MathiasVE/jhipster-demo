@@ -1,7 +1,6 @@
 {
   "relationships": [
     {
-      "relationshipId": 1,
       "relationshipType": "one-to-one",
       "relationshipName": "job",
       "otherEntityName": "job",
@@ -10,7 +9,6 @@
       "otherEntityRelationshipName": "jobHistory"
     },
     {
-      "relationshipId": 2,
       "relationshipType": "one-to-one",
       "relationshipName": "department",
       "otherEntityName": "department",
@@ -19,7 +17,6 @@
       "otherEntityRelationshipName": "jobHistory"
     },
     {
-      "relationshipId": 3,
       "relationshipType": "one-to-one",
       "relationshipName": "employee",
       "otherEntityName": "employee",
@@ -30,25 +27,22 @@
   ],
   "fields": [
     {
-      "fieldId": 1,
       "fieldName": "startDate",
       "fieldType": "ZonedDateTime"
     },
     {
-      "fieldId": 2,
       "fieldName": "endDate",
       "fieldType": "ZonedDateTime"
     },
     {
-      "fieldId": 3,
       "fieldName": "language",
       "fieldType": "Language",
       "fieldValues": "FRENCH,ENGLISH,SPANISH"
     }
   ],
-  "changelogDate": "20160728140005",
+  "changelogDate": "20161027073756",
+  "entityTableName": "job_history",
   "dto": "no",
   "pagination": "infinite-scroll",
-  "service": "no",
-  "entityTableName": "job_history"
+  "service": "no"
 }
